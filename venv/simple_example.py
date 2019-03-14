@@ -3,6 +3,20 @@ import gspread
 import os
 import sys
 from oauth2client.service_account import ServiceAccountCredentials
+
+if (len(sys.argv) > 1 and "kingfisher H3 M3 M3N".find(sys.argv)):
+    subsheet = sys.argv[1]
+else:
+    #print("ERROR IN PARAMETER"); exit 1
+    subsheet = 'kingfisher'
+
+
+if (len(sys.argv) > 2):
+    path_to_csv = sys.argv[2]
+else:
+    path_to_csv = "data_result_OK.csv"
+
+
 scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('CIProject-752eb8bdfba6.json', scope)
 
@@ -25,11 +39,21 @@ print(release)
 
 
 
-print(worksheet)
-print(worksheet.get_all_values())
-print(worksheet.range('AR3:AS3'))
-val = worksheet.cell(3, 44).value
-print(val)
+f = open(path_to_csv, 'r')
+
+for line in f:
+    print(line.split(',')[0])
+
+
+
+
+
+
+# print(worksheet)
+# print(worksheet.get_all_values())
+# print(worksheet.range('AR3:AS3'))
+# val = worksheet.cell(3, 44).value
+# print(val)
 
 
 # for i in range(1, 100):
